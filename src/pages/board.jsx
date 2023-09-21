@@ -29,7 +29,8 @@ const Board = () => {
     { position: { x: 265, y: 660 }, name: "Player 6", image:"src/assets/Img/visitante.PNG",  },
   ]);
   const [visitorNumber, setVisitorNumber] = useState(0);
-  const [play, setPlay] = useState('free')
+  const [play01L, setPlay01L] = useState({})
+  const [play01V, setPlay01V] = useState({})
   const [showName, setShowName] = useState('')
 
 
@@ -85,7 +86,7 @@ const Board = () => {
   
 
       return ( localPlayers.slice(0, localNumber).map((item, index) =>   
-      <Player index={index} key={index} position={item.position} bounds={constraintPlayerRef} name={item.name} image={item.image} showName={showName}/>
+      <Player index={index} key={index} position={item.position} bounds={constraintPlayerRef} name={item.name} image={item.image} showName={showName} animation={play01L}/>
       ) )
     
     }
@@ -93,7 +94,7 @@ const Board = () => {
   const handleVisitorPlayers = () => {
 
     return ( visitorPlayers.slice(0, visitorNumber).map((item, index) =>   
-    <Player index={index} key={index} position={item.position} bounds={constraintPlayerRef} name={item.name} image={item.image} showName={showName}/>
+    <Player index={index} key={index} position={item.position} bounds={constraintPlayerRef} name={item.name} image={item.image} showName={showName} animation={play01V}/>
     ) )
    
   }  
@@ -133,16 +134,27 @@ const onevsone = () => {
 
  
   
-    let localPos =  ([{ position: { x:254, y:385}, name: "Player 1", image:"src/assets/Img/local.PNG", }]);
+    let localPos =  ([{ position: { x:254, y:385}, name: "Player 1", image:"src/assets/Img/local.PNG",},
+    { position: { x: 420, y: 168 }, name: "Player 2", image:"src/assets/Img/local.PNG",},
+    { position: { x: 265, y: 226 }, name: "Player 3", image:"src/assets/Img/local.PNG",},
+    { position: { x: 110, y: 168 }, name: "Player 4", image:"src/assets/Img/local.PNG",},
+    { position: { x: 40, y: 58 }, name: "Player 5", image:"src/assets/Img/local.PNG",},
+    { position: { x: 265, y: 58 }, name: "Player 6", image:"src/assets/Img/local.PNG",}]);
 
-    let visitingPos = ([{ position: { x: 225, y: 438 }, name: "Player 1", image:"src/assets/Img/visitante.PNG" }]);
+    let visitingPos = ([{ position: { x: 225, y: 438 }, name: "Player 1", image:"src/assets/Img/visitante.PNG" },
+    { position: { x: 110, y: 555 }, name: "Player 2", image:"src/assets/Img/visitante.PNG",},
+    { position: { x: 265, y: 500 }, name: "Player 3", image:"src/assets/Img/visitante.PNG", },
+    { position: { x: 420, y: 557 }, name: "Player 4", image:"src/assets/Img/visitante.PNG",},
+    { position: { x: 500, y: 660 }, name: "Player 5", image:"src/assets/Img/visitante.PNG", },
+    { position: { x: 265, y: 660 }, name: "Player 6", image:"src/assets/Img/visitante.PNG",  },]);
 
     setLocalPlayers(localPos)
     setVisitorPlayers(visitingPos)
     setLocalNumber(1)
     setVisitorNumber(1)
-    setPlay('1vs1')
-
+    setPlay01L({y:50})
+    setPlay01V({y:110})
+    
 
 }
 
@@ -184,34 +196,6 @@ const onevsone = () => {
           ></img>
         </div>
       </motion.div>  
-
-      
-
-
-
-       {/* WP BALL */}
-      {/* <Draggable
-        bounds={{ left: -10, top: -10, right: 580, bottom: 770 }} //Bound limits for ball movement set to field
-        nodeRef={nodeRef}
-        defaultPosition={{ x: 280, y: 386 }}
-        onDrag={ballDragged} // Ball glows when dragged
-        onStop={() => setBallGlow("")} //Glow dissapears when dragging stops
-      >
-        <div
-          
-          ref={nodeRef}
-          className="ballCover w-[30px] h-[30px] absolute z-20"
-        >
-          <div className=" wpBallCover w-[30px] h-[30px] mx-auto  absolute bg-transparent rounded z-30"></div>
-          <img
-            id={ballGlow}
-            className="wpBall w-[30px] h-[30px] relative mx-auto  z-10"
-            src="./src/assets/Img/Wp_Ball.png"
-            //   style={{boxShadow:`${ballGlow}`}}
-            style={{ filter: `dropShadow(5px 5px 5px black)` }}
-          ></img>
-        </div>
-      </Draggable> */}
 
 
       {handlePlayers()}

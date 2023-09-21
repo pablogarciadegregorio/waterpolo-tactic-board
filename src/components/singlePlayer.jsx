@@ -22,7 +22,8 @@ const Player = (props) => {
       whileTap={{ cursor: "grabbing" }}
       className="z-20 absolute"
       style={props.position}
-     
+      animate={props.animation}
+      transition={{ duration: 1 }}
       
       
       >
