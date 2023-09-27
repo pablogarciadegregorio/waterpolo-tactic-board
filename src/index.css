@@ -11,6 +11,10 @@ body{
 
   padding: 0px !important;
 }
+.board{
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
 #ballDragged {
   filter: drop-shadow(0px 0px 10px white);

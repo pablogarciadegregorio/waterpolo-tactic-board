@@ -38,7 +38,7 @@ const Player = (props) => {
             className=" player flex  rounded-full  w-[50px] h-[50px] top-[0px] left-[0px] mx-auto  absolute bg-transparent z-1 "
             src={props.image}
           ></img>
-          <div className="nameWrapper flex-col  top-[100%] left-[-10%] text-xs relative z-12">
+          <div className="nameWrapper flex-col  top-[100%] left-[-13%] text-xs relative z-12">
             <p className={`relative z-10 w-[50px] inline-flex text-black font-black ${props.showName}`} >{props.name}</p>
 
           </div>
