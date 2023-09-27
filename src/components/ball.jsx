@@ -1,6 +1,5 @@
 
 import "../index.css";
-// import "../../dist/output.css";
 import { motion } from "framer-motion"
 
 const Ball = (props) => {
