@@ -20,32 +20,32 @@ const Board = () => {
     {
       position: { x: 40, y: 660 },
       name: "Player 1",
-      image: "src/assets/Img/visitante.PNG",
+      image: "./static/img/visitante.PNG",
     },
     {
       position: { x: 110, y: 555 },
       name: "Player 2",
-      image: "src/assets/Img/visitante.PNG",
+      image: "./static/img/visitante.PNG",
     },
     {
       position: { x: 265, y: 500 },
       name: "Player 3",
-      image: "src/assets/Img/visitante.PNG",
+      image: "./static/img/visitante.PNG",
     },
     {
       position: { x: 420, y: 557 },
       name: "Player 4",
-      image: "src/assets/Img/visitante.PNG",
+      image: "./static/img/visitante.PNG",
     },
     {
       position: { x: 500, y: 660 },
       name: "Player 5",
-      image: "src/assets/Img/visitante.PNG",
+      image: "./static/img/visitante.PNG",
     },
     {
       position: { x: 265, y: 660 },
       name: "Player 6",
-      image: "src/assets/Img/visitante.PNG",
+      image: "./static/img/visitante.PNG",
     },
   ]);
   const [visitorNumber, setVisitorNumber] = useState(0);
@@ -128,32 +128,32 @@ const Board = () => {
         {
           position: { x: 500, y: 58 },
           name: "Player 1",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: 420, y: 168 },
           name: "Player 2",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: 265, y: 226 },
           name: "Player 3",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: 110, y: 168 },
           name: "Player 4",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: 40, y: 58 },
           name: "Player 5",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: 265, y: 58 },
           name: "Player 6",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
       ]);
     }
@@ -175,32 +175,32 @@ const Board = () => {
         {
           position: {x: player1, y: player1H},
           name: "Player 1",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: player2, y: player2H },
           name: "Player 2",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: player3, y: player3H },
           name: "Player 3",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: player4, y: player4H },
           name: "Player 4",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: player5, y: player5H },
           name: "Player 5",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
         {
           position: { x: player6, y: player6H },
           name: "Player 6",
-          image: "src/assets/Img/local.PNG",
+          image: "./static/img/local.PNG",
         },
       ]);
     
@@ -208,32 +208,32 @@ const Board = () => {
         {
           position: {x: player1, y: player1HV},
           name: "Player 1",
-          image: "src/assets/Img/visitante.PNG",
+          image: "./static/img/visitante.PNG",
         },
         {
           position: { x: player2, y: player2HV },
           name: "Player 2",
-          image: "src/assets/Img/visitante.PNG",
+          image: "./static/img/visitante.PNG",
         },
         {
           position: { x: player3, y: player3HV },
           name: "Player 3",
-          image: "src/assets/Img/visitante.PNG",
+          image: "./static/img/visitante.PNG",
         },
         {
           position: { x: player4, y: player4HV },
           name: "Player 4",
-          image: "src/assets/Img/visitante.PNG",
+          image: "./static/img/visitante.PNG",
         },
         {
           position: { x: player5, y: player5HV },
           name: "Player 5",
-          image: "src/assets/Img/visitante.PNG",
+          image: "./static/img/visitante.PNG",
         },
         {
           position: { x: player6, y: player6HV },
           name: "Player 6",
-          image: "src/assets/Img/visitante.PNG",
+          image: "./static/img/visitante.PNG",
         },
       ]);
 
@@ -443,7 +443,8 @@ const Board = () => {
       />
 
       {handlePlayers()}
-      <Buttons increaseLocalPlayers={increaseLocalPlayers} increaseVisitingPlayers={increaseVisitingPlayers} decreaseLocalPlayers={decreaseLocalPlayers} showName={showName} handleShowName={handleShowName}/>
+      <Buttons increaseLocalPlayers={increaseLocalPlayers} increaseVisitingPlayers={increaseVisitingPlayers} decreaseLocalPlayers={decreaseLocalPlayers}
+      decreaseVisitingPlayers={decreaseVisitingPlayers} showName={showName} handleShowName={handleShowName}/>
     </motion.div>
 
 

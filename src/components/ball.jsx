@@ -29,7 +29,7 @@ const Ball = (props) => {
           <img
             id={props.ballGlow}
             className="wpBall w-[30px] h-[30px] relative mx-auto  z-10"
-            src="./src/assets/Img/Wp_Ball.png"
+            src="./static/img/Wp_Ball.png"
 
             style={{ filter: `dropShadow(5px 5px 5px black)` }}
           ></img>

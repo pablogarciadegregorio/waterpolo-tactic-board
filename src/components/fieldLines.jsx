@@ -29,7 +29,7 @@ return (
     <img
       className="wpLogo sm:w-[200px] md:w-[200px] lg:w-[200px] xl:w-[200px] 2xl:w-[200px] sm:h-[200px] md:h-[200px] lg:h-[200px] xl:h-[200px] 2xl:-[200px] 
        absolute  opacity-10 z-1"
-      src="./src/assets/Img/logo_background.png"
+      src="./static/img/logo_background.png"
       style={props.calculateCenterLogo()}
     ></img>
 
