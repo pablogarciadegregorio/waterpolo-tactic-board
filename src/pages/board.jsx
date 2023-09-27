@@ -162,7 +162,7 @@ const Board = () => {
         let right =  window.innerWidth -60
         let bottom = window.innerHeight -60
 
-        setPlayerBounds(constraintPlayerRef)
+        setPlayerBounds({top:0, left:0, right:right, bottom:bottom})
 
         let player1 = parseInt(window.innerWidth*0.84 -30);  let player1H = parseInt(window.innerHeight*0.1-20); let player1HV = parseInt(window.innerHeight*0.85);
         let player2 = parseInt(window.innerWidth*0.7 -20); let player2H = parseInt(window.innerHeight*0.25-20); let player2HV = parseInt(window.innerHeight*0.70)
@@ -434,7 +434,7 @@ const Board = () => {
         ref={constraintBallRef}
       ></motion.div>
       <motion.div
-        className="playerBounds z-0 bg-transparent w-[100%] h-[100%] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute"
+        className="playerBounds z-0 bg-transparent w-[calc(100%-50px)] h-[calc(100%-50px)] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute"
         ref={constraintPlayerRef}
       ></motion.div>
 
