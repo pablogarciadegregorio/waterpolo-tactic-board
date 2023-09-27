@@ -8,7 +8,7 @@ const Goals = (props) => {
         style={props.calculateCenterGoal()}
       ></img>
       <img
-        className={`goal  w-[100px] sm:w-[100px] lg:w-[100px] xl:w-[100px] 2xl:w-[100px]  top-[95%] absolute z-[40]`}
+        className={`goal  w-[100px] sm:w-[100px] lg:w-[100px] xl:w-[100px] 2xl:w-[100px]  top-[10%] absolute z-[40]`}
         src="./static/img/GoalBotv2.png"
         style={props.calculateCenterGoal()}
       ></img>
