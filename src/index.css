@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+body{
+  overflow:hidden;
+}
+
 #root {
 
   padding: 0px !important;

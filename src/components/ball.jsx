@@ -1,0 +1,42 @@
+import React from "react";
+import "../index.css";
+import "../../dist/output.css";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion"
+
+const Ball = (props) => {
+
+
+    return (
+
+        <motion.div
+        drag
+        dragConstraints={props.constraintBallRef}
+        dragElastic={0}
+        dragMomentum={false}
+        dragPropagation={true}
+        whileTap={{ cursor: "grabbing" }}
+       
+       className="z-30 absolute"
+        style={props.ballStartingPosition()}
+
+      >
+      <div
+
+          className="ballCover w-[30px] h-[30px] absolute z-30"
+        >
+          <div className=" wpBallCover w-[30px] h-[30px] mx-auto  absolute bg-transparent rounded z-30"></div>
+          <img
+            id={props.ballGlow}
+            className="wpBall w-[30px] h-[30px] relative mx-auto  z-10"
+            src="./src/assets/Img/Wp_Ball.png"
+
+            style={{ filter: `dropShadow(5px 5px 5px black)` }}
+          ></img>
+        </div>
+      </motion.div>
+
+    )
+}
+
+export default Ball

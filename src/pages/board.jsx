@@ -4,45 +4,17 @@ import "../index.css";
 import "../../css/style.css";
 import { useRef, useState, useEffect } from "react";
 import Player from "../components/singlePlayer";
+import LaneMarkers from "../components/laneMarkers";
+import Ball from "../components/ball";
+import Goals from "../components/goals";
+import FieldLines from "../components/fieldLines";
+import Buttons from "../components/buttons"; 
 import { motion } from "framer-motion";
 
 const Board = () => {
-  const constraintPlayerRef = React.useRef(null); //Boundaries for draggable field elements
-  const constraintRef = useRef(null); // Ball and Players
-  const [ballGlow, setBallGlow] = useState("");
-  const [localPlayers, setLocalPlayers] = useState([
-    {
-      position: { x: 500, y: 58 },
-      name: "Player 1",
-      image: "src/assets/Img/local.PNG",
-    },
-    {
-      position: { x: 420, y: 168 },
-      name: "Player 2",
-      image: "src/assets/Img/local.PNG",
-    },
-    {
-      position: { x: 265, y: 226 },
-      name: "Player 3",
-      image: "src/assets/Img/local.PNG",
-    },
-    {
-      position: { x: 110, y: 168 },
-      name: "Player 4",
-      image: "src/assets/Img/local.PNG",
-    },
-    {
-      position: { x: 40, y: 58 },
-      name: "Player 5",
-      image: "src/assets/Img/local.PNG",
-    },
-    {
-      position: { x: 265, y: 58 },
-      name: "Player 6",
-      image: "src/assets/Img/local.PNG",
-    },
-  ]);
-
+  const constraintPlayerRef = useRef(null); //Boundaries for draggable field elements
+  const constraintBallRef = useRef(null); // Ball and Players
+  const [localPlayers, setLocalPlayers] = useState([{}]);
   const [localNumber, setLocalNumber] = useState(0);
   const [visitorPlayers, setVisitorPlayers] = useState([
     {
@@ -77,67 +49,279 @@ const Board = () => {
     },
   ]);
   const [visitorNumber, setVisitorNumber] = useState(0);
-  const [play01L, setPlay01L] = useState({});
-  const [play01V, setPlay01V] = useState({});
-  const [showName, setShowName] = useState("");
-  const [logoStyle, setLogoStyle] = useState({});
-  const [goalStyle, setGoalStyle] = useState({});
-  
+   const [showName, setShowName] = useState("hidden");
+  const [logoStyle, setLogoStyle] = useState({
+    left: `${parseInt(
+      50 - ((parseInt(window.innerHeight) / 4) * 100) / window.innerWidth / 2
+    )}%`,
+    right: `${parseInt(
+      50 - ((parseInt(window.innerHeight) / 4) * 100) / window.innerWidth / 2
+    )}%`,
+    top: `${parseInt(
+      50 - ((parseInt(window.innerHeight) / 4) * 100) / window.innerHeight / 2
+    )}%`,
+    bottom: `${parseInt(
+      50 - ((parseInt(window.innerHeight) / 4) * 100) / window.innerHeight / 2
+    )}%`,
+    height: `${parseInt(window.innerHeight) / 4}px`,
+    width: `${parseInt(window.innerHeight) / 4}px`,
+  });
+  const [goalStyle, setGoalStyle] = useState({
+    left: `${parseInt(50 - (100 * 100) / window.innerWidth / 2)}%`,
+    right: `${parseInt(50 - (100 * 100) / window.innerWidth / 2)}%`,
+  });
+  const [playerBounds, setPlayerBounds] = useState({})
+  const [ballGlow, setBallGlow] = useState("");
 
- 
-console.log(goalStyle)
+
+
+
   // #### FUNCTIONS #### \\
 
   // CENTER GOALS AND LOGO
- 
+
+
+
   useEffect(() => {
+    // ON LOAD CENTERS LOGO AND GOALS DEPENDING ON DEVICE
+
+    // SET LOGO STYLE
+    if (window.innerWidth < 640) {
+      let dimensions = parseInt(window.innerHeight / 4);
+      setLogoStyle({
+        left: `${parseInt(50 - (dimensions * 100) / window.innerWidth / 2)}%`,
+        top: `${parseInt(50 - (dimensions * 100) / window.innerHeight / 2)}%`,
+        right: `${parseInt(50 - (dimensions * 100) / window.innerWidth / 2)}%`,
+        bottom: `${parseInt(
+          50 - (dimensions * 100) / window.innerHeight / 2
+        )}%`,
+        height: `${dimensions}px`,
+        width: `${dimensions}px`,
+      });
+    } else {
+      setLogoStyle({
+        left: `${parseInt(50 - (200 * 100) / 600 / 2)}%`,
+        right: `${parseInt(50 - (200 * 100) / 600 / 2)}%`,
+        top: `${parseInt(50 - (200 * 100) / 800 / 2)}%`,
+        bottom: `${parseInt(50 - (200 * 100) / 800 / 2)}%`,
+      });
+    }
+
+
+      // SET GOAL STYLE
+    if (window.innerWidth < 640) {
+      setGoalStyle({
+        left: `${parseInt(50 - (100 * 100) / window.innerWidth / 2)}%`,
+        right: `${parseInt(50 - (100 * 100) / window.innerWidth / 2)}%`,
+      });
+    } else {
+      setGoalStyle({ left: `${parseInt(50 - (100 * 100) / 792 / 2)}%` });
+    }
+
+    // SET INITIAL PLAYERS
+
+    if (window.innerWidth > 640) {
+
+      setPlayerBounds({top:0, left:0, right:600-60, bottom:800-60})
+
+      setLocalPlayers([
+        {
+          position: { x: 500, y: 58 },
+          name: "Player 1",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: 420, y: 168 },
+          name: "Player 2",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: 265, y: 226 },
+          name: "Player 3",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: 110, y: 168 },
+          name: "Player 4",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: 40, y: 58 },
+          name: "Player 5",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: 265, y: 58 },
+          name: "Player 6",
+          image: "src/assets/Img/local.PNG",
+        },
+      ]);
+    }
+      else { 
+        
+        let right =  window.innerWidth -60
+        let bottom = window.innerHeight -60
+
+        setPlayerBounds(constraintPlayerRef)
+
+        let player1 = parseInt(window.innerWidth*0.84 -30);  let player1H = parseInt(window.innerHeight*0.1-20); let player1HV = parseInt(window.innerHeight*0.85);
+        let player2 = parseInt(window.innerWidth*0.7 -20); let player2H = parseInt(window.innerHeight*0.25-20); let player2HV = parseInt(window.innerHeight*0.70)
+        let player3 = parseInt(window.innerWidth*0.5 -30); let player3H = parseInt(window.innerHeight*0.35-20); let player3HV = parseInt(window.innerHeight*0.60)
+        let player4 = parseInt(window.innerWidth*0.3 -35); let player4H = parseInt(window.innerHeight*0.25-20); let player4HV = parseInt(window.innerHeight*0.70)
+        let player5 = parseInt(window.innerWidth*0.16 -20); let player5H = parseInt(window.innerHeight*0.1-20); let player5HV = parseInt(window.innerHeight*0.85);
+        let player6 = parseInt(window.innerWidth*0.5 -30); let player6H = parseInt(window.innerHeight*0.1-20); let player6HV = parseInt(window.innerHeight*0.85);
+        
+        setLocalPlayers([
+        {
+          position: {x: player1, y: player1H},
+          name: "Player 1",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: player2, y: player2H },
+          name: "Player 2",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: player3, y: player3H },
+          name: "Player 3",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: player4, y: player4H },
+          name: "Player 4",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: player5, y: player5H },
+          name: "Player 5",
+          image: "src/assets/Img/local.PNG",
+        },
+        {
+          position: { x: player6, y: player6H },
+          name: "Player 6",
+          image: "src/assets/Img/local.PNG",
+        },
+      ]);
+    
+      setVisitorPlayers([
+        {
+          position: {x: player1, y: player1HV},
+          name: "Player 1",
+          image: "src/assets/Img/visitante.PNG",
+        },
+        {
+          position: { x: player2, y: player2HV },
+          name: "Player 2",
+          image: "src/assets/Img/visitante.PNG",
+        },
+        {
+          position: { x: player3, y: player3HV },
+          name: "Player 3",
+          image: "src/assets/Img/visitante.PNG",
+        },
+        {
+          position: { x: player4, y: player4HV },
+          name: "Player 4",
+          image: "src/assets/Img/visitante.PNG",
+        },
+        {
+          position: { x: player5, y: player5HV },
+          name: "Player 5",
+          image: "src/assets/Img/visitante.PNG",
+        },
+        {
+          position: { x: player6, y: player6HV },
+          name: "Player 6",
+          image: "src/assets/Img/visitante.PNG",
+        },
+      ]);
+
+    }
+
+
+
+  }, []);
+
+  useEffect(() => {
+    // WATCHES WIDTH SIZE TO ADJUST PROPORTIONS ON WIDTH CHANGE
     function resizeCenterGoal() {
-      if (window.innerWidth < 640) {setGoalStyle ({left:`${parseInt(50-(100*100/window.innerWidth/2))}%`, right:`${parseInt(50-(100*100/window.innerWidth/2))}%` })}
-      else {setGoalStyle({left:`${parseInt(50-(100*100/800/2))}%`})}
+      if (window.innerWidth < 640) {
+        setGoalStyle({
+          left: `${parseInt(50 - (100 * 100) / window.innerWidth / 2)}%`,
+          right: `${parseInt(50 - (100 * 100) / window.innerWidth / 2)}%`,
+        });
+      } else {
+        setGoalStyle({ left: `${parseInt(50 - (100 * 100) / 800 / 2)}%` });
+      }
     }
 
     function resizeCenterLogo() {
       if (window.innerWidth < 640) {
-        let dimensions = parseInt(window.innerHeight/4) 
-        setLogoStyle ( {left:`${parseInt(50-(dimensions*100/window.innerWidth/2))}%`, top:`${parseInt(50-(dimensions*100/window.innerHeight/2))}%`,
-                        right:`${parseInt(50-(dimensions*100/window.innerWidth/2))}%`, bottom:`${parseInt(50-(dimensions*100/window.innerHeight/2))}%`,
-                        height:`${dimensions}px`, width:`${dimensions}px`})
-        }
+        let dimensions = parseInt(window.innerHeight / 4);
+        setLogoStyle({
+          left: `${parseInt(50 - (dimensions * 100) / window.innerWidth / 2)}%`,
+          top: `${parseInt(50 - (dimensions * 100) / window.innerHeight / 2)}%`,
+          right: `${parseInt(
+            50 - (dimensions * 100) / window.innerWidth / 2
+          )}%`,
+          bottom: `${parseInt(
+            50 - (dimensions * 100) / window.innerHeight / 2
+          )}%`,
+          height: `${dimensions}px`,
+          width: `${dimensions}px`,
+        });
+      } else {
+        setLogoStyle({
+          left: `${parseInt(50 - (200 * 100) / 600 / 2)}%`,
+          right: `${parseInt(50 - (200 * 100) / 600 / 2)}%`,
+          top: `${parseInt(50 - (200 * 100) / 800 / 2)}%`,
+          bottom: `${parseInt(50 - (200 * 100) / 800 / 2)}%`,
+        });
+      }
     }
 
-
     // Attach the event listener to the window object
-    window.addEventListener('resize', () => {resizeCenterGoal(); resizeCenterLogo()});
+    window.addEventListener("resize", () => {
+      resizeCenterGoal();
+      resizeCenterLogo();
+    });
 
     // Remove the event listener when the component unmounts
     return () => {
-      window.removeEventListener('resize', () => {resizeCenterGoal(); resizeCenterLogo()});
+      window.removeEventListener("resize", () => {
+        resizeCenterGoal();
+        resizeCenterLogo();
+      });
     };
   }, []);
 
-
-
-const calculateCenterGoal = () => {
-  
-  if (window.innerWidth < 640) {return goalStyle}
-  else {return {left:`${parseInt(50-(100*100/800/2))}%`}}}
-
-const calculateCenterLogo = () => {
-
-  if (window.innerWidth < 640) {
-
-  return logoStyle
-  }
-}
-
-
-
-  // BALL GLOW EFFECT
-
-  const ballDragged = () => {
-    setBallGlow("ballDragged");
+  const calculateCenterGoal = () => {
+    if (window.innerWidth < 640) {
+      return goalStyle;
+    } else {
+      return { left: `${parseInt(50 - (100 * 100) / 800 / 2)}%` };
+    }
   };
 
+  const calculateCenterLogo = () => {
+    return logoStyle;
+  };
+
+  // BALL STARTING POSITION
+
+  const ballStartingPosition = () => {
+    if (window.innerWidth < 640) {
+      return {
+        left: `${parseInt(window.innerWidth / 2 - 20)}px`,
+        right: `${parseInt(window.innerWidth / 2 - 20)}px`,
+        top: `${parseInt(window.innerHeight / 2 - 15)}px`,
+        bottom: `${parseInt(window.innerHeight / 2 - 20)}px`,
+      };
+    } else {
+      return { top: "386px", left: "280px" };
+    }
+  };
 
   // SETTING NUMBER OF PLAYERS
 
@@ -175,11 +359,11 @@ const calculateCenterLogo = () => {
           index={index}
           key={index}
           position={item.position}
-          bounds={constraintPlayerRef}
+          playerBounds={playerBounds}
           name={item.name}
           image={item.image}
           showName={showName}
-          animation={play01L}
+         
         />
       ));
   };
@@ -192,11 +376,11 @@ const calculateCenterLogo = () => {
           index={index}
           key={index}
           position={item.position}
-          bounds={constraintPlayerRef}
+          playerBounds={playerBounds}
           name={item.name}
           image={item.image}
           showName={showName}
-          animation={play01V}
+          
         />
       ));
   };
@@ -225,80 +409,10 @@ const calculateCenterLogo = () => {
 
   // TACTICS \\
 
-  const onevsone = () => {
-    let localPos = [
-      {
-        position: { x: 254, y: 385 },
-        name: "Player 1",
-        image: "src/assets/Img/local.PNG",
-      },
-      {
-        position: { x: 420, y: 168 },
-        name: "Player 2",
-        image: "src/assets/Img/local.PNG",
-      },
-      {
-        position: { x: 265, y: 226 },
-        name: "Player 3",
-        image: "src/assets/Img/local.PNG",
-      },
-      {
-        position: { x: 110, y: 168 },
-        name: "Player 4",
-        image: "src/assets/Img/local.PNG",
-      },
-      {
-        position: { x: 40, y: 58 },
-        name: "Player 5",
-        image: "src/assets/Img/local.PNG",
-      },
-      {
-        position: { x: 265, y: 58 },
-        name: "Player 6",
-        image: "src/assets/Img/local.PNG",
-      },
-    ];
+  
 
-    let visitingPos = [
-      {
-        position: { x: 225, y: 438 },
-        name: "Player 1",
-        image: "src/assets/Img/visitante.PNG",
-      },
-      {
-        position: { x: 110, y: 555 },
-        name: "Player 2",
-        image: "src/assets/Img/visitante.PNG",
-      },
-      {
-        position: { x: 265, y: 500 },
-        name: "Player 3",
-        image: "src/assets/Img/visitante.PNG",
-      },
-      {
-        position: { x: 420, y: 557 },
-        name: "Player 4",
-        image: "src/assets/Img/visitante.PNG",
-      },
-      {
-        position: { x: 500, y: 660 },
-        name: "Player 5",
-        image: "src/assets/Img/visitante.PNG",
-      },
-      {
-        position: { x: 265, y: 660 },
-        name: "Player 6",
-        image: "src/assets/Img/visitante.PNG",
-      },
-    ];
+ 
 
-    setLocalPlayers(localPos);
-    setVisitorPlayers(visitingPos);
-    setLocalNumber(1);
-    setVisitorNumber(1);
-    setPlay01L({ y: 50 });
-    setPlay01V({ y: 110 });
-  };
 
   return (
     <motion.div
@@ -306,95 +420,33 @@ const calculateCenterLogo = () => {
       h-screen 2xl:h-[800px] xl:h-[800px] lg:h-[800px] md:h-[800px] sm:h-[800px] flex-1 
       mx-auto  relative rounded-md  border-4 border-white
       bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-300 to-sky-500"
-    > 
+    >
+      {/* INVISIBLE LAYERS TO SET BOUNDARIES (YOU CANNOT UPDATE DRAGCONSTRAINTS WITH USESTATES) */}
 
-  {/* FIELD LINES */}
+      <motion.div
+        className="ballBounds z-0 bg-transparent w-full h-full sm:w-[570px] md:w-[570px] lg:w-[570px] xl:w-[570px] 2xl:w-[570px] sm:h-[770px] md:h-[770px] lg:h-[770px] xl:h-[770px] 2xl:h-[770px] absolute"
+        ref={constraintBallRef}
+      ></motion.div>
+      <motion.div
+        className="playerBounds z-0 bg-transparent w-[calc(100%-50px)] h-[calc(100%-50px)] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute"
+        ref={constraintPlayerRef}
+      ></motion.div>
 
-       <div className="goalLineTop  bg-white w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] h-[3px] mx-auto top-[3%] absolute"></div>
-       <div className="2mLine w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] bg-red-600 h-[3px]  mx-auto absolute 
-       top-[10%] sm:top-[75px] lg:top-[75px] xl:top-[75px] 2xl:top-[75px]"></div>
-       <div className="5mLine w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] bg-yellow-300 h-[3px]  mx-auto absolute
-       top-[25%] sm:top-[180px] md:top-[180px] lg:top-[180px] xl:top-[180px] 2xl:top-[180px]"></div>
-       <div className="middleLine w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] h-[3px]  bg-none absolute 
-        top-[50%] sm:top-[400px] md:top-[400px] lg:top-[400px] xl:top-[400px] 2xl:top-[400px] items-center border-dashed border-2 border-white"></div>
-       <div className="5mLine w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] bg-yellow-300 h-[3px]   absolute
-       bottom-[25%] sm:bottom-[180px] md:bottom-[180px] lg:bottom-[180px] xl:bottom-[180px] 2xl:bottom-[180px]"></div>
-       <div className="2mLine w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] bg-red-600 h-[3px]  mx-auto absolute 
-       bottom-[10%] sm:bottom-[75px] lg:bottom-[75px] xl:bottom-[75px] 2xl:bottom-[75px]"></div>
-       <div className="goalLineBot bg-white w-full sm:w-[592px] lg:w-[592px] xl:w-[592px] 2xl:w-[592px] h-[3px] mx-auto top-[97%] absolute "></div>
-       <img
-         className="wpLogo sm:w-[200px] md:w-[200px] lg:w-[200px] xl:w-[200px] 2xl:w-[200px] sm:h-[200px] md:h-[200px] lg:h-[200px] xl:h-[200px] 2xl:-[200px] 
-         absolute sm:left-[194px] md:left-[194px] lg:left-[194px] xl:left-[194px] 2xl:left-[194px] sm:top-[299px] md:top-[299px] xl:top-[299px] 2xl:top-[299px] opacity-10 z-1"
-         src="./src/assets/Img/logo_background.png"
-         style={calculateCenterLogo()}
-       ></img>
+      {/* FIELD AND LANES */}
 
-   {/* GOALS */}
+      <FieldLines calculateCenterLogo={calculateCenterLogo}/>
+      <Goals calculateCenterGoal={calculateCenterGoal} />
+      <LaneMarkers />
+      <Ball
+        ballStartingPosition={ballStartingPosition}
+        constraintBallRef={constraintBallRef}
+      />
 
-   <img
-     className="goal  w-[100px] sm:w-[100px] lg:w-[100px] xl:w-[100px] 2xl:w-[100px] left-[36%] top-[0%] absolute z-20
-     xl:left-[43%] 2xl:left-[43%] lg:left-[43%]"
-     src="./src/assets/Img/GoalTopv2.png"
-     style={calculateCenterGoal()}
-   ></img>
-   <img
-     className={`goal  w-[100px] sm:w-[100px] lg:w-[100px] xl:w-[100px] 2xl:w-[100px] m-auto top-[95%] absolute z-[20]`}
-    src="./src/assets/Img/GoalBotv2.png"
-    style={calculateCenterGoal()}
-   ></img>
+      {handlePlayers()}
+      <Buttons increaseLocalPlayers={increaseLocalPlayers} increaseVisitingPlayers={increaseVisitingPlayers} decreaseLocalPlayers={decreaseLocalPlayers} showName={showName} handleShowName={handleShowName}/>
+    </motion.div>
 
 
-<div className="  laneMarkers absolute">
-         <div className="laneMarketTop hidden sm:flex md:flex lg:flex xl:flex 2xl:flex  flex-row relative top-[20px]">
-           <div className="h-[10px] w-[10px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-2 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1  bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] ml-[110px] mr-1 bg-red-600 relative  left-[2px] rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative  rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative  rounded-sm "></div>
-           <div className="h-[10px] w-[10px] mx-[1px] bg-red-600 relative  rounded-sm "></div>
-         </div>
-
-         <div className="laneMarketBot hidden sm:flex md:flex lg:flex xl:flex 2xl:flex flex-row top-[754px] relative">
-           <div className="h-[10px] w-[10px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-2 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] ml-[108px] mr-1 bg-red-600 relative   left-[2px] rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-red-600 relative   rounded-sm "></div>
-           <div className="h-[10px] w-[20px] mx-1 bg-white relative   rounded-sm "></div>
-           <div className="h-[10px] w-[10px] mx-[1px] bg-red-600 relative   rounded-sm "></div>
-         </div>
-       </div>
-
-
-
-
-
-
-
-     </motion.div>
 
     // <motion.div
     //   ref={constraintRef}
