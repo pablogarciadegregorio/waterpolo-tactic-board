@@ -423,7 +423,7 @@ const Board = () => {
 
     <motion.div
       className="board  w-full 2xl:w-[600px] xl:w-[600px] lg:w-[600px] md:w-[600px] sm:w-[600px] 2xl:my-4 xl:my-4 lg:my-4 md:my-4 sm:my-4
-      h-[100svh] 2xl:h-[800px] xl:h-[800px] lg:h-[800px] md:h-[800px] sm:h-[800px] flex-1 
+      h-[calc(100dvh)] 2xl:h-[800px] xl:h-[800px] lg:h-[800px] md:h-[800px] sm:h-[800px] flex-1 
       mx-auto  relative rounded-md  border-4 border-white
       bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-300 to-sky-500"
     >
