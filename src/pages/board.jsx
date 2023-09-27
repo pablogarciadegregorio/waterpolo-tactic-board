@@ -434,7 +434,7 @@ const Board = () => {
         ref={constraintBallRef}
       ></motion.div>
       <motion.div
-        className="playerBounds z-0 bg-transparent w-[calc(100%-50px)] h-[calc(100%-50px)] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute"
+        className="playerBounds z-0 bg-transparent w-[100%] h-[100%] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute"
         ref={constraintPlayerRef}
       ></motion.div>
 
