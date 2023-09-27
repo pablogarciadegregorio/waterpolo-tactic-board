@@ -1,5 +1,5 @@
 import React from "react";
-import Draggable from "react-draggable";
+
 import "../index.css";
 import "../../css/style.css";
 import { useRef, useState, useEffect } from "react";

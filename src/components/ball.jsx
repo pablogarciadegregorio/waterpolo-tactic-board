@@ -1,7 +1,6 @@
-import React from "react";
+
 import "../index.css";
-import "../../dist/output.css";
-import { useRef, useState } from "react";
+// import "../../dist/output.css";
 import { motion } from "framer-motion"
 
 const Ball = (props) => {
