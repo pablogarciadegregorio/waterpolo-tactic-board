@@ -11,6 +11,15 @@ body{
 
   padding: 0px !important;
 }
+
+
+
+.board, .ballCover, .player-component {
+  touch-action: none; /* habilita multitouch */
+  user-select: none;
+}
+
+
 .board{
 
   padding-bottom: env(safe-area-inset-bottom);

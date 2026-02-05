@@ -9,14 +9,18 @@ const Ball = (props) => {
 
         <motion.div
         drag
+        dragListener={true}
         dragConstraints={props.constraintBallRef}
         dragElastic={0}
         dragMomentum={false}
         dragPropagation={true}
         whileTap={{ cursor: "grabbing" }}
        
-       className="z-30 absolute"
-        style={props.ballStartingPosition()}
+       className="z-30 absolute cursor-grab"
+        style={{
+                ...props.ballStartingPosition(),
+                touchAction: "none" 
+            }}
 
       >
       <div

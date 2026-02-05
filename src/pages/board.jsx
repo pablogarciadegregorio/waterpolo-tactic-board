@@ -422,19 +422,19 @@ const Board = () => {
  
 
     <motion.div
-      className="board   w-full 2xl:w-[600px] xl:w-[600px] lg:w-[600px] md:w-[600px] sm:w-[600px] 2xl:my-4 xl:my-4 lg:my-4 md:my-4 sm:my-4
+      className="board select-none touch-none cursor-grab w-full 2xl:w-[600px] xl:w-[600px] lg:w-[600px] md:w-[600px] sm:w-[600px] 2xl:my-4 xl:my-4 lg:my-4 md:my-4 sm:my-4
       h-[calc(100dvh)] 2xl:h-[800px] xl:h-[800px] lg:h-[800px] md:h-[800px] sm:h-[800px] flex-1 
       mx-auto  relative rounded-md  border-4 border-white
       bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-300 to-sky-500"
     >
-      {/* INVISIBLE LAYERS TO SET BOUNDARIES (YOU CANNOT UPDATE DRAGCONSTRAINTS WITH USESTATES) */}
+      {/* INVISIBLE LAYERS TO SET BOUNDARIES */}
 
       <motion.div
-        className="ballBounds z-0 bg-transparent w-full h-full sm:w-[570px] md:w-[570px] lg:w-[570px] xl:w-[570px] 2xl:w-[570px] sm:h-[770px] md:h-[770px] lg:h-[770px] xl:h-[770px] 2xl:h-[770px] absolute"
+        className="ballBounds z-0 bg-transparent w-full h-full sm:w-[570px] md:w-[570px] lg:w-[570px] xl:w-[570px] 2xl:w-[570px] sm:h-[770px] md:h-[770px] lg:h-[770px] xl:h-[770px] 2xl:h-[770px] absolute pointer-events-none"
         ref={constraintBallRef}
       ></motion.div>
       <motion.div
-        className="playerBounds z-0 bg-transparent w-[calc(100%-50px)] h-[calc(100%-50px)] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute"
+        className="playerBounds z-0 bg-transparent w-[calc(100%-50px)] h-[calc(100%-50px)] sm:w-[540px] md:w-[540px] lg:w-[540px] xl:w-[540px] 2xl:w-[540px] sm:h-[740px] md:h-[740px] lg:h-[740px] xl:h-[740px] 2xl:h-[740px] absolute pointer-events-none"
         ref={constraintPlayerRef}
       ></motion.div>
 

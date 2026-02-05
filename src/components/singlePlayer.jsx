@@ -15,12 +15,13 @@ const Player = (props) => {
 
       <motion.div 
       drag
+      dragListener={true}
       dragConstraints={props.playerBounds}
       dragElastic={0}
       dragMomentum={false}
       dragPropagation={true}
       whileTap={{ cursor: "grabbing" }}
-      className="z-20 absolute"
+      className="select-none touch-none cursor-grab z-20 absolute"
       style={props.position}
       animate={props.animation}
       transition={{ duration: 1 }}

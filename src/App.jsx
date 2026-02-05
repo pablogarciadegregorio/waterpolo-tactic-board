@@ -7,7 +7,7 @@ import "../css/style.css"
 function App() {
   return (
     <>
-        <Board/>
+        <Board />
       
       
     </>
